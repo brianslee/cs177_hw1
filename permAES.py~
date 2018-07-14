@@ -1,0 +1,17 @@
+from Crypto.Cipher import AES
+import binascii
+import sys
+
+key = b'\x03\x06\x02\x00\x01\x00' + 10 * b'\x00'
+#plaintext = b'\x00' * 16
+plaintext = key
+
+encryption = AES.new(key, AES.MODE_ECB)
+ciphertext = encryption.encrypt(plaintext)
+recovered_plaintext = encryption.decrypt(ciphertext)
+
+# some examples of printouts
+
+print(binascii.hexlify(key))
+print(binascii.hexlify(ciphertext))
+print(binascii.hexlify(recovered_plaintext))
